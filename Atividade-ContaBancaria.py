@@ -1,57 +1,51 @@
-
 class Banco:
+    valorDeposito = 0
     soma = 0
-    subtracao = 0
-    desativar = "sim"
 
-    def __init__(self, nome, tipoConta, numConta, numAgencia, saldo, statusConta=True):
+    def __init__(self, nome, tipoConta, numConta, numAgencia, saldo, chequeEspecial, statusConta=True):
         self.nome = nome
         self.tipoConta = tipoConta
         self.numConta = numConta
         self.numAgencia = numAgencia
         self.saldo = saldo
         self.statusConta = statusConta
+        self.chequeEspecial = chequeEspecial
 
-    def deposito(self):
-        valorDeposito = float(input("Quanto você quer depositar? "))
+    def verificarSaldo(self):
+        print(self.saldo)
 
-        if valorDeposito >= 0:
-            self.saldo += valorDeposito
-            self.soma += valorDeposito
+    def deposito(self, valor):
+        self.valor = valor
+        if self.valor >= 0 and self.statusConta == True:
+            self.saldo += self.valor
+            print(f'o valor depositado foi {self.valor}')
 
-    def transferencia(self):
-        valorTransferencia = float(input("Quanto você quer transferir? "))
-
-        if valorTransferencia >= 0 and self.saldo >= valorTransferencia:
-            self.saldo -= valorTransferencia
-            self.subtracao += valorTransferencia
-        else:
-            print("Saldo insuficiente para transferência.")
+    def saque(self, valor):
+        self.valor = valor
+        if self.valor >= 0 and self.statusConta == True:
+            self.saldo -= self.valor
+            print(f'o valor sacado foi {self.valor}')
 
     def desativarConta(self):
-        desativarConta = input("Você deseja desativar a conta? Digite sim ou não: ").lower()
-        if self.saldo == 0:
-            print("A conta pode ser desativada.")
-        elif self.statusConta and desativarConta == self.desativar:
-            self.statusConta = False
-            print("Conta desativada.")
+        if self.saldo == 0 and self.statusConta == True:
+            self.statusConta == False
+            print(f'conta desativada {self.statusConta}')
         else:
-            print("Conta continua ativada.")
+            print(f'sua conta já está desativada.')
 
-    def __str__(self):
-        return f"Nome: {self.nome}\nTipo de Conta: {self.tipoConta}\nNúmero da Conta: {self.numConta}\nNúmero da Agência: {self.numAgencia}\nSaldo: {self.saldo}"
+    def ativarLimite(self, valor):
+        self.valor = valor
+        print(f'você ativou seu limite, o limite é de {self.valor}')
 
-
-conta1 = Banco("brenda", "corrente", "3422125-3", "00", 10.00)
-print("Saldo:", conta1.saldo)
-conta1.deposito()
-conta1.transferencia()
-conta1.desativarConta()
-
-print(conta1)
+    def informacaoConta(self):
+        print(f'Essa conta pertence a {self.nome}. \n '
+              f'Conta: {self.numConta} \n Agência: {self.numAgencia} \n Tipo de conta: {self.tipoConta} \n Saldo: {self.saldo}')
 
 
-
-
+conta1 = Banco("maria jose", "corrente", "41254", "001", 0)
+conta1.deposito(10)
+conta1.saque(5)
+conta1.verificarSaldo()
+conta1.informacaoConta()
 
 
