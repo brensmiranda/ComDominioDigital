@@ -7,7 +7,7 @@ class Banco:
         self.tipoConta = tipoConta
         self.numConta = numConta
         self.numAgencia = numAgencia
-        self.saldo = saldo
+        self.saldo = float(saldo)
         self.statusConta = statusConta
         self.chequeEspecial = chequeEspecial
 
@@ -15,7 +15,7 @@ class Banco:
         print(self.saldo)
 
     def deposito(self, valor):
-        self.valor = valor
+        self.valor = float(valor)
         if self.valor >= 0 and self.statusConta == True:
             self.saldo += self.valor
             print(f'o valor depositado foi {self.valor}')
@@ -38,14 +38,22 @@ class Banco:
         print(f'você ativou seu limite, o limite é de {self.valor}')
 
     def informacaoConta(self):
-        print(f'Essa conta pertence a {self.nome}. \n '
+        info = (f'Essa conta pertence a {self.nome}. \n '
               f'Conta: {self.numConta} \n Agência: {self.numAgencia} \n Tipo de conta: {self.tipoConta} \n Saldo: {self.saldo}')
+        return info
 
+    def comprovanteBancario(self):
+        with open("comprovanteBancario.txt", "a") as arquivo:
+            arquivo.write(self.informacaoConta() + '\n')
+            print("As informações da conta foram registradas no comprovante.")
 
-conta1 = Banco("maria jose", "corrente", "41254", "001", 0)
-conta1.deposito(10)
-conta1.saque(5)
+    def abrirComprovante(self):
+        with open("comprovanteBancario.txt", "r", encoding="latin-1") as arquivo:
+            comprovante = arquivo.read()
+            print(comprovante)
+
+conta1 = Banco("maria jose", "corrente", "41254", "001", 0, 0)
+conta1.deposito(300)
+conta1.saque(150)
 conta1.verificarSaldo()
-conta1.informacaoConta()
-
-
+conta1.abrirComprovante()
