@@ -1,0 +1,16 @@
+
+Essa conta pertence a maria jose. 
+ Conta: 41254 
+ Agência: 001 
+ Tipo de conta: corrente 
+ Saldo: 1010.0
+Essa conta pertence a maria jose. 
+ Conta: 41254 
+ Agência: 001 
+ Tipo de conta: corrente 
+ Saldo: 1005.0
+Essa conta pertence a maria jose. 
+ Conta: 41254 
+ Agência: 001 
+ Tipo de conta: corrente 
+ Saldo: 5.0
